@@ -13,26 +13,20 @@ def get_pokemon(name):
     response = requests.get(URL + name.lower())
     response.raise_for_status()
     pokemon_data = response.json()
-     
-   
-    # Obtener la URL de la imagen del Pokémon en formato PNG
     sprite_url = response.json()["sprites"]["front_default"]
-
-    # Descargar la imagen del Pokémon en formato PNG
     response = requests.get(sprite_url)
     with open(f"pokemon.png", "wb") as f:
         f.write(response.content)
 
-    # Agregar permisos al archivo
     os.chmod(f"pokemon.png", 0o755)
 
     time.sleep(0.5)
-    # Cargar la imagen del archivo
+  
     try:
         with Image.open(f"pokemon.png") as img:
-            # Convertir la imagen a ASCII utilizando ascii_magic
+          
             ascii_art = ascii_magic.from_image("pokemon.png")
-            # Mostrar la imagen en la consola
+       
             print()
             ascii_art.to_terminal(columns=120, width_ratio=3)
             print(colored("Nombre:", "green"), pokemon_data["name"])
@@ -58,4 +52,3 @@ if __name__ == "__main__":
         else: 
             print()
             get_pokemon(pokemon_name)
-            
