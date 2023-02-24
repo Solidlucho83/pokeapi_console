@@ -1,4 +1,7 @@
 # pokeapi_console
+
+Aplicación para consola desarrollada en Python, que retorna el pokemón ingresado, y muestra sus datos y una imagen en formato ascii
+
 Console application developed in Python, which returns the entered pokemon, and shows its data and an image in ascii format
 
 # How to install
