@@ -6,11 +6,11 @@ import time
 from termcolor import colored
 
 # URL de la API de Pokémon
-url = "https://pokeapi.co/api/v2/pokemon/"
+URL = "https://pokeapi.co/api/v2/pokemon/"
 
 def get_pokemon(name):
     # Hacer una solicitud GET a la API de Pokémon para obtener la información del Pokémon
-    response = requests.get(url + name.lower())
+    response = requests.get(URL + name.lower())
     response.raise_for_status()
     pokemon_data = response.json()
      
@@ -26,7 +26,7 @@ def get_pokemon(name):
     # Agregar permisos al archivo
     os.chmod(f"pokemon.png", 0o755)
 
-    time.sleep(1)
+    time.sleep(0.5)
     # Cargar la imagen del archivo
     try:
         with Image.open(f"pokemon.png") as img:
@@ -48,15 +48,14 @@ def get_pokemon(name):
         print(f"Error al cargar la imagen: {e}")
 
 if __name__ == "__main__":
-    # Obtener un Pokémon y mostrarlo en la consola
-    print()
-    pokemon_name = input(colored("Ingresa el Nombre del Pokémon => ", "blue")).lower()
-       
-    response = requests.get(url + pokemon_name)
-    if response.status_code != 200:
-        print(colored(f"No se encontró ningún Pokémon con el nombre {pokemon_name}", "red"))
-        
-    else: 
-        # Si el nombre es válido, obtener y mostrar la información del Pokémon
-        print()
-        get_pokemon(pokemon_name)
+      while True:
+        pokemon_name = input(colored("Ingresa el Nombre del Pokémon (o 'salir' para finalizar) => ", "blue")).lower()
+        if pokemon_name == "salir":
+            break
+        response = requests.get(URL + pokemon_name)
+        if response.status_code != 200:
+            print(colored(f"No se encontró ningún Pokémon con el nombre {pokemon_name}", "red"))
+        else: 
+            print()
+            get_pokemon(pokemon_name)
+            
