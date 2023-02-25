@@ -31,6 +31,7 @@ def prepare_pokemon_image(pokemon_data):
         f.write(response.content)
 
     os.chmod(IMAGE_FILE, 0o755)
+    time.sleep(0.5)
     
 def print_pokemon_data(pokemon_data):
     print(colored("Nombre:", COLOR_GREEN), pokemon_data["name"])
