@@ -12,7 +12,7 @@ except ModuleNotFoundError:
 
 # URL de la API de Pokémon
 URL = "https://pokeapi.co/api/v2/pokemon/"
-WELCOME_MSG = "Enter the Name of the Pokémon (or 'exit' to finish) =>"
+WELCOME_MSG = "Enter the Name of the Pokémon (or 'exit' to finish) => "
 EXIT = "exit"
 NAME_FILE = ""
 COLOR_GREEN = "green"
@@ -22,6 +22,7 @@ COLOR_RED = "red"
 COLOR_YELLOW = "yellow"
 COLOR_CYAN = "cyan"
 COLOR_GREY = "grey"
+
 IMAGE_FILE = "pokemon.png"
 
 def get_pokemon_data(name):
@@ -46,6 +47,9 @@ def print_pokemon_data(pokemon_data):
     print(colored("Att:", COLOR_YELLOW), pokemon_data["stats"][1]["base_stat"])
     print(colored("Def:", COLOR_CYAN), pokemon_data["stats"][2]["base_stat"])
     print(colored("Type:", COLOR_GREY), pokemon_data["types"][0]["type"]["name"])
+    print(colored("Abilities:", "light_green"))
+    for ability in pokemon_data["abilities"]:
+        print(" ", ability["ability"]["name"])
 
 def show_pokemon(pokemon_data):
     try:
