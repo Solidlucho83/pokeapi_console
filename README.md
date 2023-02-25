@@ -11,5 +11,7 @@ Aplicación para consola desarrollada en Python, que retorna el pokemón ingresa
 
 # Samples.
 
-![Captura de pantalla 2023-02-24 1156562](https://user-images.githubusercontent.com/52086707/221210418-022a591e-76a6-4d58-95bf-b3f60d9b3329.png)
-![Captura de pantalla 2023-02-25 061340](https://user-images.githubusercontent.com/52086707/221349030-a4ddbdd4-fe8e-428a-a04c-65b0bf7d9c3d.png)
+![Captura de pantalla 2023-02-25 0811502](https://user-images.githubusercontent.com/52086707/221353780-eb61f311-f2ab-45c7-a632-bbd18eeae0ed.png)
+![Captura de pantalla 2023-02-25 081150](https://user-images.githubusercontent.com/52086707/221353781-a23b8738-9352-44f4-99b1-f4303bd294cc.png)
+
+
