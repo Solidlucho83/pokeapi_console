@@ -9,7 +9,7 @@ from termcolor import colored
 URL = "https://pokeapi.co/api/v2/pokemon/"
 WELCOME_MSG = "Ingresa el Nombre del Pokémon (o 'salir' para finalizar) => "
 EXIT = "salir"
-
+NAME_FILE = ""
 COLOR_GREEN = "green"
 COLOR_BLUE = "blue"
 COLOR_MAGENTA = "magenta"
@@ -17,6 +17,7 @@ COLOR_RED = "red"
 COLOR_YELLOW = "yellow"
 COLOR_CYAN = "cyan"
 COLOR_GREY = "grey"
+IMAGE_FILE = "pokemon.png"
 
 def get_pokemon_data(name):
     response = requests.get(URL + name.lower())
@@ -26,11 +27,11 @@ def get_pokemon_data(name):
 def prepare_pokemon_image(pokemon_data):
     sprite_url = pokemon_data["sprites"]["front_default"]
     response = requests.get(sprite_url)
-    with open(f"pokemon.png", "wb") as f:
+    with open(IMAGE_FILE, "wb") as f:
         f.write(response.content)
 
-    os.chmod(f"pokemon.png", 0o755)
-
+    os.chmod(IMAGE_FILE, 0o755)
+    
 def print_pokemon_data(pokemon_data):
     print(colored("Nombre:", COLOR_GREEN), pokemon_data["name"])
     print(colored("Peso:", COLOR_BLUE), f"{pokemon_data['weight']} kg")
@@ -42,8 +43,8 @@ def print_pokemon_data(pokemon_data):
 
 def show_pokemon(pokemon_data):
     try:
-        with Image.open(f"pokemon.png") as img:
-            ascii_art = ascii_magic.from_image("pokemon.png")
+        with Image.open(IMAGE_FILE) as img:
+            ascii_art = ascii_magic.from_image(IMAGE_FILE)
             print()
             ascii_art.to_terminal(columns=120, width_ratio=3)
             print_pokemon_data(pokemon_data)
