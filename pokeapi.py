@@ -13,10 +13,9 @@ except ModuleNotFoundError:
 # URL de la API de Pokémon
 URL = "https://pokeapi.co/api/v2/pokemon/"
 ALL_PK = "https://pokeapi.co/api/v2/pokemon?limit=1000"
-LIST_PK = "?limit=10000"
 WELCOME_MSG = "Enter the Name of the Pokémon (or 'exit' to finish, or 'list' to see all the available pokemons) => "
 EXIT = "exit"
-ALL = "list"
+LIST = "list"
 COLOR_GREEN = "green"
 COLOR_BLUE = "blue"
 COLOR_MAGENTA = "magenta"
@@ -66,7 +65,7 @@ def show_pokemon(pokemon_data):
 
 def check_pokemon_found(response, pokemon_name):
     if response.status_code != 200:
-        print(colored(f"No Pokémon with the name found {pokemon_name}", "red"))
+        print(colored(f"No Pokémon with the name found {pokemon_name}, if you want you can check the list ", COLOR_RED))
         return False
     return True
 
@@ -79,7 +78,7 @@ def get_all_pokemon_names():
 def show_all_pk():
     response = requests.get(ALL_PK)
     pokemon_list = response.json()["results"]
-    print("Lista de Pokémon:")
+    print("All Pokémon:")
     for pokemon in pokemon_list:
         print(pokemon["name"])
       
@@ -89,7 +88,7 @@ if __name__ == "__main__":
         pokemon_name = input(colored(WELCOME_MSG, COLOR_BLUE)).lower()
         if pokemon_name == EXIT:
             break
-        elif pokemon_name == 'list':
+        elif pokemon_name == LIST:
             show_all_pk()
             print()
             continue
