@@ -12,9 +12,11 @@ except ModuleNotFoundError:
 
 # URL de la API de Pokémon
 URL = "https://pokeapi.co/api/v2/pokemon/"
-WELCOME_MSG = "Enter the Name of the Pokémon (or 'exit' to finish) => "
+ALL_PK = "https://pokeapi.co/api/v2/pokemon?limit=1000"
+LIST_PK = "?limit=10000"
+WELCOME_MSG = "Enter the Name of the Pokémon (or 'exit' to finish, or 'list' to see all the available pokemons) => "
 EXIT = "exit"
-NAME_FILE = ""
+ALL = "list"
 COLOR_GREEN = "green"
 COLOR_BLUE = "blue"
 COLOR_MAGENTA = "magenta"
@@ -22,7 +24,6 @@ COLOR_RED = "red"
 COLOR_YELLOW = "yellow"
 COLOR_CYAN = "cyan"
 COLOR_GREY = "grey"
-
 IMAGE_FILE = "pokemon.png"
 
 def get_pokemon_data(name):
@@ -69,16 +70,33 @@ def check_pokemon_found(response, pokemon_name):
         return False
     return True
 
+def get_all_pokemon_names():
+    response = requests.get(URL)
+    response.raise_for_status()
+    pokemon_list = response.json()["results"]
+    return [pokemon["name"] for pokemon in pokemon_list]
+
+def show_all_pk():
+    response = requests.get(ALL_PK)
+    pokemon_list = response.json()["results"]
+    print("Lista de Pokémon:")
+    for pokemon in pokemon_list:
+        print(pokemon["name"])
+      
 
 if __name__ == "__main__":
     while True:
         pokemon_name = input(colored(WELCOME_MSG, COLOR_BLUE)).lower()
         if pokemon_name == EXIT:
             break
+        elif pokemon_name == 'list':
+            show_all_pk()
+            print()
+            continue
+        
         response = requests.get(URL + pokemon_name)
         if check_pokemon_found(response, pokemon_name):
             print()
             pokemon_data = get_pokemon_data(pokemon_name)
             prepare_pokemon_image(pokemon_data)
             show_pokemon(pokemon_data)
-
