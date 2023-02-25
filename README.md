@@ -1,4 +1,5 @@
 # pokeapi_console
+[![Python](https://img.shields.io/badge/Python-3.10+-yellow?style=for-the-badge&logo=python&logoColor=white&labelColor=101010)](https://python.org)
 
 Console application developed in Python, which returns the entered pokemon, and shows its data and an image in ascii format
 
