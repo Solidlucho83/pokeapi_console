@@ -14,7 +14,7 @@ URL = "https://pokeapi.co/api/v2/pokemon/"
 ALL_PK = "https://pokeapi.co/api/v2/pokemon?limit=1000"
 WELCOME_MSG = "Enter the Name of the Pokémon (or 'all' to see all the available pokemons, or 'exit' to finish) => "
 EXIT = "exit"
-LIST = "list"
+LIST = "all"
 COLOR_GREEN = "green"
 COLOR_BLUE = "blue"
 COLOR_MAGENTA = "magenta"
@@ -76,7 +76,7 @@ def show_all_pk():
       
 if __name__ == "__main__":
     while True:
-        pokemon_name = input(colored(WELCOME_MSG, COLOR_BLUE)).lower()
+        pokemon_name = input(colored(WELCOME_MSG, COLOR_BLUE)).lower().strip()
         if pokemon_name == EXIT:
             break
         elif pokemon_name == LIST:
