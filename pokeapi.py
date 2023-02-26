@@ -7,7 +7,7 @@ try:
     import ascii_magic
 except ModuleNotFoundError:
     print("Error: ascii_magic library is required to run this program. Please install the package with the following command:")
-    print("pip install ascii-magic", "yellow")
+    print("pip install ascii-magic")
     exit()
 
 URL = "https://pokeapi.co/api/v2/pokemon/"
