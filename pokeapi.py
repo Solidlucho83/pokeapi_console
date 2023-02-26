@@ -6,14 +6,13 @@ from termcolor import colored
 try:
     import ascii_magic
 except ModuleNotFoundError:
-    print(colored("Error: ascii_magic library is required to run this program. Please install the package with the following command:", "red"))
-    print(colored("pip install ascii-magic", "yellow"))
+    print("Error: ascii_magic library is required to run this program. Please install the package with the following command:")
+    print("pip install ascii-magic", "yellow")
     exit()
 
-# URL de la API de Pokémon
 URL = "https://pokeapi.co/api/v2/pokemon/"
 ALL_PK = "https://pokeapi.co/api/v2/pokemon?limit=1000"
-WELCOME_MSG = "Enter the Name of the Pokémon (or 'exit' to finish, or 'list' to see all the available pokemons) => "
+WELCOME_MSG = "Enter the Name of the Pokémon (or 'all' to see all the available pokemons, or 'exit' to finish) => "
 EXIT = "exit"
 LIST = "list"
 COLOR_GREEN = "green"
@@ -35,7 +34,6 @@ def prepare_pokemon_image(pokemon_data):
     response = requests.get(sprite_url)
     with open(IMAGE_FILE, "wb") as f:
         f.write(response.content)
-
     os.chmod(IMAGE_FILE, 0o755)
     time.sleep(0.5) #optional
     
@@ -69,12 +67,6 @@ def check_pokemon_found(response, pokemon_name):
         return False
     return True
 
-def get_all_pokemon_names():
-    response = requests.get(URL)
-    response.raise_for_status()
-    pokemon_list = response.json()["results"]
-    return [pokemon["name"] for pokemon in pokemon_list]
-
 def show_all_pk():
     response = requests.get(ALL_PK)
     pokemon_list = response.json()["results"]
@@ -82,7 +74,6 @@ def show_all_pk():
     for pokemon in pokemon_list:
         print(pokemon["name"])
       
-
 if __name__ == "__main__":
     while True:
         pokemon_name = input(colored(WELCOME_MSG, COLOR_BLUE)).lower()
